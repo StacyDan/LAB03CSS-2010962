@@ -1,0 +1,154 @@
+//Operacion 08
+
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class Opercion08 {
+
+    public static void removeDuplicates(final List<Integer> numbers) {
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            for (int j = i + 1; j < numbers.size(); j++) {
+                if (numbers.get(i).equals(numbers.get(j))) {
+                    numbers.remove(j);
+                }
+            }
+        }
+    }
+
+@Test
+    public void testOperación08Unit01() {
+        // Prueba con duplicados en la lista
+        List<Integer> input = new ArrayList<>();
+        input.add(1);
+        input.add(2);
+        input.add(2);
+        input.add(3);
+        input.add(3);
+        input.add(4);
+
+        List<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+        expected.add(4);
+
+        removeDuplicates(input);
+
+        assertEquals(expected, input);
+    }
+
+@Test
+    public void testOperación08Unit02() {
+        // Prueba con todos los elementos duplicados
+        List<Integer> input = new ArrayList<>();
+        input.add(5);
+        input.add(5);
+        input.add(5);
+
+        List<Integer> expected = new ArrayList<>();
+        expected.add(5);
+
+        removeDuplicates(input);
+
+        assertEquals(expected, input);
+    }
+
+@Test
+    public void testOperación08Unit03() {
+        // Prueba sin duplicados en la lista
+        List<Integer> input = new ArrayList<>();
+        input.add(1);
+        input.add(2);
+        input.add(3);
+
+        List<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+
+        removeDuplicates(input);
+
+        assertEquals(expected, input);
+    }
+
+@Test
+    public void testOperación08Unit04() {
+        // Prueba con una lista vacía
+        List<Integer> input = new ArrayList<>();
+        List<Integer> expected = new ArrayList<>();
+
+        removeDuplicates(input);
+
+        assertEquals(expected, input);
+        // Se espera que la lista siga vacía después de eliminar duplicados.
+    }
+}
+
+//Operacion 09
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class MathOperationsTest {
+
+    public static double divTwoNumbers(int number1, int number2) {
+        if (number2 == 0) {
+            throw new IllegalArgumentException("No puedes dividir entre 0!");
+        }
+        return (double) number1 / number2;
+    }
+
+@Test
+    public void testOperación09Unit01() {
+        // Prueba una división válida
+        int dividend = 10;
+        int divisor = 2;
+
+        double result = divTwoNumbers(dividend, divisor);
+
+        assertEquals(5.0, result, 0.001);
+        // Se espera que la división sea igual a 5.0 con un margen de error de 0.001.
+    }
+
+@Test
+    public void testOperación09Unit02() {
+        // Prueba con números negativos
+        int dividend = -8;
+        int divisor = 2;
+
+        double result = divTwoNumbers(dividend, divisor);
+
+        assertEquals(-4.0, result, 0.001);
+        // Se espera que la división sea igual a -4.0 con un margen de error de 0.001.
+    }
+
+@Test
+    public void testOperación09Unit03() {
+        // Prueba con números grandes
+        int dividend = 1000000;
+        int divisor = 1000;
+
+        double result = divTwoNumbers(dividend, divisor);
+
+        assertEquals(1000.0, result, 0.001);
+        // Se espera que la división sea igual a 1000.0 con un margen de error de 0.001.
+    }
+
+
+@Test
+    public void testOperación09Unit04() {
+        // Prueba una división por cero
+        int number1 = 5;
+        int number2 = 0;
+
+        try {
+            double result = divTwoNumbers(number1, number2);
+            // La división por cero debería lanzar una excepción.
+            fail("Se esperaba una excepción IllegalArgumentException.");
+        } catch (IllegalArgumentException e) {
+            // Se espera que se lance una excepción IllegalArgumentException.
+        }
+    }
+}
